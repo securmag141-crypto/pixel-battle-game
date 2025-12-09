@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pixel Battle - Главная</title>
+    <meta name="theme-color" content="#a8d8b8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div class="game-frame" id="gameFrame">
+        <!-- Меню (скрытое по умолчанию) -->
+        <div class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <div class="menu-title">МЕНЮ БИТВЫ</div>
+                <button class="close-menu-btn" id="closeMenuBtn">×</button>
+            </div>
+            
+            <div class="menu-items">
+                <a href="profile.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-text">Мой профиль</span>
+                    <div class="menu-item-border"></div>
+                </a>
+                
+                <a href="#" class="menu-item" id="battleLink">
+                    <span class="menu-icon">⚔️</span>
+                    <span class="menu-text">Бой</span>
+                    <div class="menu-item-border"></div>
+                </a>
+                
+                <div class="menu-divider"></div>
+                
+                <a href="index.html" class="menu-item logout">
+                    <span class="menu-icon">🚪</span>
+                    <span class="menu-text">Выйти</span>
+                    <div class="menu-item-border"></div>
+                </a>
+            </div>
+            
+            <div class="menu-footer">
+                <div class="player-info-mini">
+                    <span id="miniPlayerName">Игрок</span>
+                    <div class="mini-hp">❤️ <span id="miniHP">20</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Основной контент -->
+        <div class="main-content">
+            <!-- Шапка с кнопкой меню -->
+            <header class="game-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <div class="menu-arrow">▶</div>
+                    <div class="menu-toggle-border"></div>
+                </button>
+                
+                <div class="player-status">
+                    <div class="coins-display">🪙 <span id="headerCoins">100</span></div>
+                    <div class="xp-display">⭐ <span id="headerXP">100</span></div>
+                </div>
+            </header>
+            
+            <!-- Центральная область -->
+            <main class="game-main">
+                <div class="welcome-message">
+                    <h2 class="welcome-title" id="welcomeTitle">Добро пожаловать, Воин!</h2>
+                    <div class="welcome-subtitle">Готовься к пиксельной битве</div>
+                </div>
+                
+                <div class="central-image-container">
+                    <div class="image-frame">
+                        <img src="assets/images/life.png" alt="Pixel Art" class="main-image" id="mainImage">
+                        <div class="image-glow"></div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="pixel-action-btn" id="quickBattleBtn">
+                            <span class="action-icon">⚔️</span>
+                            <span>Быстрый бой</span>
+                            <div class="action-btn-border"></div>
+                        </button>
+                        
+                        <button class="pixel-action-btn secondary" id="practiceBtn">
+                            <span class="action-icon">🎯</span>
+                            <span>Тренировка</span>
+                            <div class="action-btn-border"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="battle-info">
+                    <div class="info-card">
+                        <div class="info-title">Твои победы</div>
+                        <div class="info-value" id="winCount">0</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">Поражения</div>
+                        <div class="info-value" id="loseCount">0</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">Уровень</div>
+                        <div class="info-value" id="playerLevel">1</div>
+                    </div>
+                </div>
+            </main>
+            
+            <!-- Футер -->
+            <footer class="game-footer">
+                <div class="music-control">
+                    <button id="homeMusicToggle" class="pixel-btn-small">
+                        <span class="music-icon">♪</span>
+                        <span id="homeMusicStatus">Музыка: Вкл</span>
+                    </button>
+                </div>
+                <div class="hint">Используй меню для навигации</div>
+            </footer>
+        </div>
+        
+        <!-- Модальное окно для боя -->
+        <div class="modal-overlay" id="battleModal">
+            <div class="modal-content pixel-frame">
+                <div class="modal-header">
+                    <h3>⚔️ НАЧАТЬ БОЙ</h3>
+                    <button class="close-modal" id="closeModalBtn">×</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="battle-options">
+                        <div class="option-section">
+                            <label class="option-label">Присоединиться к бою:</label>
+                            <div class="code-input-group">
+                                <input type="text" id="battleCodeInput" class="pixel-input" placeholder="Введите код боя" maxlength="6">
+                                <button id="joinBattleBtn" class="pixel-btn-small">Войти</button>
+                            </div>
+                        </div>
+                        
+                        <div class="divider">
+                            <span>ИЛИ</span>
+                        </div>
+                        
+                        <div class="option-section">
+                            <label class="option-label">Создать новый бой:</label>
+                            <button id="createBattleBtn" class="pixel-btn pixel-btn-primary">
+                                <span>Сгенерировать код</span>
+                                <div class="pixel-btn-border"></div>
+                            </button>
+                            
+                            <div class="generated-code" id="generatedCodeContainer">
+                                <div class="code-label">Твой код боя:</div>
+                                <div class="code-display" id="generatedCode">-----</div>
+                                <div class="code-hint">Поделись этим кодом с противником</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button id="startBattleBtn" class="pixel-btn" disabled>
+                        <span>Начать бой →</span>
+                        <div class="pixel-btn-border"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
