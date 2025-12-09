@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pixel Battle - Бой</title>
+    <meta name="theme-color" content="#f8a8a8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <div class="battle-frame">
+        <!-- Информация о противнике (вверху) -->
+        <div class="opponent-section pixel-frame">
+            <div class="battle-player-header">
+                <div class="battle-player-info">
+                    <div class="battle-player-name" id="opponentName">Противник</div>
+                    <div class="battle-player-class" id="opponentClass">Воин</div>
+                </div>
+                <div class="battle-player-stats">
+                    <div class="battle-stat">
+                        <span class="stat-icon">❤️</span>
+                        <span class="stat-value" id="opponentHP">20</span>/20
+                    </div>
+                    <div class="battle-stat">
+                        <span class="stat-icon">🛡️</span>
+                        <span class="stat-value" id="opponentShield">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hp-bar-container">
+                <div class="hp-bar-label">HP Противника</div>
+                <div class="hp-bar">
+                    <div class="hp-bar-fill" id="opponentHPBar" style="width: 100%"></div>
+                </div>
+            </div>
+            
+            <div class="opponent-avatar">
+                <div class="avatar-large enemy" id="opponentAvatar">
+                    <span class="avatar-icon">👹</span>
+                </div>
+                <div class="turn-indicator" id="opponentTurnIndicator">
+                    <div class="indicator-dot"></div>
+                    <span>ХОДИТ</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Центральная область боя -->
+        <div class="battle-arena">
+            <div class="arena-header">
+                <div class="battle-id">
+                    Бой #<span id="battleId">0001</span>
+                </div>
+                <div class="round-counter">
+                    Раунд: <span id="currentRound">1</span>
+                </div>
+                <div class="timer" id="battleTimer">00:30</div>
+            </div>
+            
+            <div class="dice-section">
+                <div class="dice-container">
+                    <div class="dice dice-attack" id="attackDice">
+                        <div class="dice-face">1</div>
+                        <div class="dice-label">Атака (1-6)</div>
+                    </div>
+                    
+                    <div class="dice dice-defense" id="defenseDice">
+                        <div class="dice-face">1</div>
+                        <div class="dice-label">Защита (1-3)</div>
+                    </div>
+                </div>
+                
+                <div class="dice-result" id="diceResult">
+                    <div class="result-title">Результат броска:</div>
+                    <div class="result-values">
+                        <span class="result-attack">Атака: <span id="attackValue">0</span></span>
+                        <span class="result-defense">Защита: <span id="defenseValue">0</span></span>
+                    </div>
+                    <div class="damage-dealt" id="damageDealt">
+                        Нанесено урона: <span>0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="battle-log" id="battleLog">
+                <div class="log-header">Журнал боя:</div>
+                <div class="log-content">
+                    <div class="log-entry">Бой начался! Приготовьтесь!</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Информация о текущем игроке (внизу) -->
+        <div class="player-section pixel-frame">
+            <div class="player-avatar">
+                <div class="avatar-large player" id="playerAvatarBattle">
+                    <span class="avatar-icon">⚔️</span>
+                </div>
+                <div class="turn-indicator active" id="playerTurnIndicator">
+                    <div class="indicator-dot"></div>
+                    <span>ТВОЙ ХОД</span>
+                </div>
+            </div>
+            
+            <div class="hp-bar-container">
+                <div class="hp-bar-label">Твое HP</div>
+                <div class="hp-bar">
+                    <div class="hp-bar-fill" id="playerHPBar" style="width: 100%"></div>
+                </div>
+            </div>
+            
+            <div class="battle-player-header">
+                <div class="battle-player-info">
+                    <div class="battle-player-name" id="playerNameBattle">Игрок</div>
+                    <div class="battle-player-class" id="playerClassBattle">Воин</div>
+                </div>
+                <div class="battle-player-stats">
+                    <div class="battle-stat">
+                        <span class="stat-icon">❤️</span>
+                        <span class="stat-value" id="playerHPBattle">20</span>/20
+                    </div>
+                    <div class="battle-stat">
+                        <span class="stat-icon">🛡️</span>
+                        <span class="stat-value" id="playerShield">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Панель управления -->
+        <div class="battle-controls">
+            <button id="rollDiceBtn" class="pixel-btn pixel-btn-battle">
+                <span class="btn-icon">🎲</span>
+                <span class="btn-text">Бросить кубики</span>
+                <div class="pixel-btn-border"></div>
+            </button>
+            
+            <button id="useItemBtn" class="pixel-btn pixel-btn-secondary" disabled>
+                <span class="btn-icon">🧪</span>
+                <span>Исп. зелье</span>
+            </button>
+            
+            <button id="fleeBtn" class="pixel-btn pixel-btn-warning">
+                <span class="btn-icon">🏃</span>
+                <span>Сбежать</span>
+            </button>
+        </div>
+        
+        <!-- Панель информации -->
+        <div class="battle-info-panel">
+            <div class="info-item">
+                <span class="info-label">Твой урон:</span>
+                <span class="info-value" id="playerDamage">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Урон противника:</span>
+                <span class="info-value" id="opponentDamage">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Время хода:</span>
+                <span class="info-value" id="turnTime">30с</span>
+            </div>
+        </div>
+        
+        <!-- Кнопка выхода -->
+        <div class="battle-exit">
+            <a href="home.html" class="pixel-btn-small">
+                <span class="btn-icon">🏠</span>
+                <span>Покинуть бой</span>
+            </a>
+        </div>
+        
+        <!-- Модальное окно результатов -->
+        <div class="result-overlay" id="resultOverlay">
+            <div class="result-modal pixel-frame">
+                <div class="result-header" id="resultHeader">
+                    <h2>⚔️ БОЙ ЗАВЕРШЕН ⚔️</h2>
+                </div>
+                
+                <div class="result-body">
+                    <div class="result-icon" id="resultIcon">🏆</div>
+                    <div class="result-title" id="resultTitle">С ПОБЕДОЙ!</div>
+                    <div class="result-message" id="resultMessage">
+                        Ты одержал победу в честном бою!
+                    </div>
+                    
+                    <div class="rewards">
+                        <div class="reward-item">
+                            <span class="reward-icon">🪙</span>
+                            <span class="reward-text">Монеты: <span id="rewardCoins">+10</span></span>
+                        </div>
+                        <div class="reward-item">
+                            <span class="reward-icon">⭐</span>
+                            <span class="reward-text">Опыт: <span id="rewardXP">+10</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="battle-stats">
+                        <div class="stat-result">
+                            <span>Всего раундов:</span>
+                            <span id="totalRounds">1</span>
+                        </div>
+                        <div class="stat-result">
+                            <span>Всего урона:</span>
+                            <span id="totalDamage">0</span>
+                        </div>
+                        <div class="stat-result">
+                            <span>Время боя:</span>
+                            <span id="battleTime">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-footer">
+                    <button id="resultContinueBtn" class="pixel-btn pixel-btn-primary">
+                        <span>Продолжить</span>
+                        <div class="pixel-btn-border"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/battle.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

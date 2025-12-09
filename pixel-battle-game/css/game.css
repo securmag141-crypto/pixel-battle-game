@@ -1,0 +1,1302 @@
+/* ===== ОБЩИЕ СТИЛИ ДЛЯ ИГРОВЫХ СТРАНИЦ ===== */
+
+/* ---- Главная страница (home.html) ---- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: calc(100vh - 20px);
+}
+
+/* Шапка игры */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: var(--color-primary);
+    border: 3px solid var(--color-text);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.menu-toggle {
+    width: 50px;
+    height: 50px;
+    background: var(--color-secondary);
+    border: 3px solid var(--color-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.menu-arrow {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle.active .menu-arrow {
+    transform: rotate(180deg);
+}
+
+.menu-toggle-border {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: -6px;
+    bottom: -6px;
+    border: 2px solid var(--color-text);
+    z-index: -1;
+}
+
+.player-status {
+    display: flex;
+    gap: 20px;
+}
+
+.coins-display, .xp-display {
+    background: white;
+    border: 2px solid var(--color-text);
+    padding: 8px 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Центральная область */
+.game-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.welcome-message {
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 28px;
+    color: var(--color-text);
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0 var(--color-primary);
+}
+
+.welcome-subtitle {
+    color: var(--color-text-light);
+    font-size: 14px;
+}
+
+/* Изображение в центре */
+.central-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.image-frame {
+    position: relative;
+    border: 4px solid var(--color-text);
+    background: white;
+    padding: 10px;
+}
+
+.main-image {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+    border: 2px solid var(--color-border);
+}
+
+.image-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--color-accent);
+    pointer-events: none;
+    animation: pixel-glow 2s infinite;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.pixel-action-btn {
+    background: var(--color-secondary);
+    border: none;
+    padding: 15px 25px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 150px;
+    justify-content: center;
+}
+
+.pixel-action-btn.secondary {
+    background: var(--color-accent);
+}
+
+.action-btn-border {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid var(--color-text);
+    z-index: -1;
+}
+
+.action-icon {
+    font-size: 20px;
+}
+
+/* Блок статистики */
+.battle-info {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.info-card {
+    background: white;
+    border: 3px solid var(--color-text);
+    padding: 15px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.info-title {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.info-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* Футер игры */
+.game-footer {
+    padding: 15px;
+    background: var(--color-primary);
+    border: 3px solid var(--color-text);
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--color-text-light);
+    text-align: center;
+    flex: 1;
+}
+
+/* ---- Боковое меню ---- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background: var(--color-bg);
+    border-right: 4px solid var(--color-text);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.menu-header {
+    padding: 20px;
+    background: var(--color-secondary);
+    border-bottom: 3px solid var(--color-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--color-text);
+}
+
+.close-menu-btn {
+    background: var(--color-danger);
+    color: white;
+    border: 2px solid var(--color-text);
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-items {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--color-text);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    background: var(--color-primary);
+    padding-left: 25px;
+}
+
+.menu-icon {
+    font-size: 24px;
+}
+
+.menu-text {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.menu-item-border {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--color-border);
+}
+
+.menu-divider {
+    height: 3px;
+    background: var(--color-text);
+    margin: 15px 20px;
+}
+
+.logout {
+    margin-top: auto;
+}
+
+.menu-footer {
+    padding: 15px;
+    background: var(--color-accent);
+    border-top: 3px solid var(--color-text);
+}
+
+.player-info-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.mini-hp {
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+/* ---- Модальные окна ---- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(90, 77, 63, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    display: none;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--color-bg);
+    max-width: 500px;
+    width: 90%;
+    animation: fade-in 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: var(--color-primary);
+    border-bottom: 3px solid var(--color-text);
+}
+
+.modal-header h3 {
+    font-size: 20px;
+}
+
+.close-modal {
+    background: var(--color-danger);
+    color: white;
+    border: 2px solid var(--color-text);
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 20px;
+    background: var(--color-accent);
+    border-top: 3px solid var(--color-text);
+    text-align: center;
+}
+
+/* Форма боя */
+.battle-options {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.option-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.code-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.code-input-group .pixel-input {
+    flex: 1;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+.generated-code {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(168, 216, 184, 0.2);
+    border: 2px solid var(--color-secondary);
+    text-align: center;
+    display: none;
+}
+
+.generated-code.active {
+    display: block;
+    animation: fade-in 0.3s ease;
+}
+
+.code-label {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+}
+
+.code-display {
+    font-size: 32px;
+    font-weight: bold;
+    font-family: monospace;
+    color: var(--color-primary);
+    letter-spacing: 5px;
+    margin: 10px 0;
+}
+
+.code-hint {
+    font-size: 12px;
+    color: var(--color-text-light);
+}
+
+/* ===== СТРАНИЦА ПРОФИЛЯ ===== */
+.back-button-container {
+    margin-bottom: 20px;
+}
+
+.pixel-back-btn {
+    background: var(--color-accent);
+    color: var(--color-text);
+    border: none;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn-border {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid var(--color-text);
+    z-index: -1;
+}
+
+.back-arrow {
+    font-size: 18px;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-title {
+    font-size: 28px;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 var(--color-accent);
+}
+
+.class-badge {
+    display: inline-block;
+    background: var(--color-warning);
+    color: var(--color-text);
+    padding: 5px 15px;
+    border: 3px solid var(--color-text);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.avatar-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.avatar-frame {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    background: var(--color-primary);
+    border: 4px solid var(--color-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.avatar-icon {
+    font-size: 48px;
+}
+
+.level-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: var(--color-danger);
+    color: white;
+    border: 3px solid var(--color-text);
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.player-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.player-title {
+    color: var(--color-text-light);
+    font-size: 14px;
+}
+
+/* Статистика профиля */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background: white;
+    border: 3px solid var(--color-text);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.stat-bar {
+    height: 8px;
+    background: var(--color-border);
+    border: 1px solid var(--color-text);
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background: var(--color-primary);
+    transition: width 0.5s ease;
+}
+
+.stat-description {
+    font-size: 11px;
+    color: var(--color-text-light);
+    margin-top: 5px;
+}
+
+/* Детали профиля */
+.details-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 18px;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 15px;
+    background: rgba(168, 200, 248, 0.1);
+    border: 2px solid var(--color-accent);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+/* Достижения */
+.achievements-section {
+    margin-bottom: 30px;
+}
+
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.achievement {
+    background: white;
+    border: 3px solid var(--color-border);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.5;
+}
+
+.achievement.unlocked {
+    opacity: 1;
+    border-color: var(--color-primary);
+}
+
+.achievement-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.achievement-desc {
+    font-size: 12px;
+    color: var(--color-text-light);
+}
+
+.profile-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-border);
+}
+
+.last-battle {
+    font-size: 12px;
+    color: var(--color-text-light);
+}
+
+.music-control-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ===== СТРАНИЦА БОЯ ===== */
+
+/* Секции игрока и противника */
+.opponent-section,
+.player-section {
+    flex: 1;
+    padding: 15px;
+}
+
+.battle-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.battle-player-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-danger);
+}
+
+.battle-player-class {
+    font-size: 14px;
+    color: var(--color-text-light);
+}
+
+.battle-player-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.battle-stat {
+    background: white;
+    border: 2px solid var(--color-text);
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.stat-icon {
+    font-size: 16px;
+}
+
+.hp-bar-container {
+    margin-bottom: 15px;
+}
+
+.hp-bar-label {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+}
+
+.hp-bar {
+    height: 20px;
+    background: var(--color-border);
+    border: 3px solid var(--color-text);
+    position: relative;
+    overflow: hidden;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    background: var(--color-danger);
+    transition: width 0.5s ease;
+}
+
+/* Аватары в бою */
+.opponent-avatar,
+.player-avatar {
+    text-align: center;
+}
+
+.avatar-large {
+    width: 100px;
+    height: 100px;
+    background: var(--color-primary);
+    border: 4px solid var(--color-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+}
+
+.avatar-large.enemy {
+    background: var(--color-danger);
+}
+
+.avatar-large.player {
+    background: var(--color-secondary);
+}
+
+.avatar-icon {
+    font-size: 48px;
+}
+
+.turn-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--color-accent);
+    padding: 5px 10px;
+    border: 2px solid var(--color-text);
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+.turn-indicator.active {
+    opacity: 1;
+    animation: pixel-glow 1s infinite;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-danger);
+    border-radius: 50%;
+}
+
+/* Арена боя */
+.battle-arena {
+    flex: 2;
+    padding: 20px;
+    background: rgba(248, 216, 168, 0.2);
+    border: 4px solid var(--color-text);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.arena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.battle-id,
+.round-counter,
+.timer {
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.timer {
+    color: var(--color-danger);
+    font-size: 20px;
+    font-family: monospace;
+}
+
+/* Кубики */
+.dice-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dice-container {
+    display: flex;
+    gap: 40px;
+}
+
+.dice {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 4px solid var(--color-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dice.rolling {
+    animation: pixel-shake 0.5s ease;
+}
+
+.dice-face {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.dice-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 12px;
+    color: var(--color-text-light);
+    white-space: nowrap;
+}
+
+.dice-attack {
+    background: var(--color-danger);
+    color: white;
+}
+
+.dice-defense {
+    background: var(--color-accent);
+}
+
+.dice-result {
+    text-align: center;
+    padding: 15px;
+    background: white;
+    border: 3px solid var(--color-text);
+    min-width: 300px;
+}
+
+.result-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+
+.result-values {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.result-attack {
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+.result-defense {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+.damage-dealt {
+    font-weight: bold;
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+/* Журнал боя */
+.battle-log {
+    flex: 1;
+    background: white;
+    border: 3px solid var(--color-text);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-header {
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+
+.log-content {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 12px;
+    max-height: 150px;
+}
+
+.log-entry {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+/* Панель управления боем */
+.battle-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background: var(--color-primary);
+    border: 3px solid var(--color-text);
+}
+
+.btn-icon {
+    font-size: 20px;
+}
+
+.battle-info-panel {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: white;
+    border: 3px solid var(--color-text);
+    margin: 10px 0;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-label {
+    display: block;
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.battle-exit {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Результаты боя */
+.result-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(90, 77, 63, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    display: none;
+}
+
+.result-overlay.active {
+    display: flex;
+}
+
+.result-modal {
+    max-width: 500px;
+    width: 90%;
+    animation: fade-in 0.5s ease;
+}
+
+.result-header {
+    padding: 20px;
+    background: var(--color-primary);
+    border-bottom: 3px solid var(--color-text);
+    text-align: center;
+}
+
+.result-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.result-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    animation: pulse 1s infinite;
+}
+
+.result-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--color-danger);
+}
+
+.result-message {
+    color: var(--color-text);
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.rewards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 25px 0;
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.reward-icon {
+    font-size: 24px;
+}
+
+.battle-stats {
+    background: rgba(168, 200, 248, 0.1);
+    border: 2px solid var(--color-accent);
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.stat-result {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.stat-result:last-child {
+    border-bottom: none;
+}
+
+.result-footer {
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===== АДАПТИВНОСТЬ ДЛЯ ИГРОВЫХ СТРАНИЦ ===== */
+@media (max-width: 768px) {
+    /* Главная страница */
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .player-status {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .main-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .pixel-action-btn {
+        width: 100%;
+    }
+    
+    /* Боковое меню */
+    .side-menu {
+        width: 250px;
+    }
+    
+    /* Профиль */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Бой */
+    .battle-frame {
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    .battle-arena {
+        padding: 10px;
+    }
+    
+    .dice-container {
+        gap: 20px;
+    }
+    
+    .dice {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .dice-face {
+        font-size: 24px;
+    }
+    
+    .battle-controls {
+        flex-wrap: wrap;
+    }
+    
+    .battle-info-panel {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .opponent-section,
+    .player-section {
+        padding: 10px;
+    }
+    
+    .avatar-large {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .avatar-icon {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Главная страница */
+    .welcome-title {
+        font-size: 20px;
+    }
+    
+    .main-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .info-card {
+        min-width: 80px;
+    }
+    
+    /* Бой */
+    .dice-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .battle-player-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .battle-player-stats {
+        justify-content: center;
+    }
+    
+    .arena-header {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .rewards {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

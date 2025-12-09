@@ -1,0 +1,172 @@
+/* ===== СТРАНИЦА АВТОРИЗАЦИИ ===== */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pixel-header {
+    margin-bottom: 40px;
+}
+
+.auth-box {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.test-users-info {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(168, 200, 248, 0.1);
+    border: 2px solid var(--color-accent);
+}
+
+.pixel-note {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.user-tag {
+    background: var(--color-secondary);
+    border: 2px solid var(--color-text);
+    padding: 6px 12px;
+    margin: 5px 0;
+    font-size: 14px;
+    position: relative;
+    text-align: center;
+}
+
+.user-tag::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid white;
+}
+
+.error-message {
+    background: var(--color-danger);
+    color: white;
+    padding: 10px;
+    border: 3px solid var(--color-text);
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+    animation: pixel-shake 0.5s ease;
+}
+
+.pixel-footer {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.music-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.music-icon {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.copyright {
+    font-size: 12px;
+    color: var(--color-text-light);
+}
+
+/* Пиксельные украшения */
+.auth-container::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid var(--color-secondary);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Анимация появления */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-container {
+    animation: fade-in 0.5s ease-out;
+}
+
+/* Декоративные пиксели */
+.decorative-pixels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.pixel-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-primary);
+}
+
+.pixel-dot:nth-child(1) { top: 10%; left: 5%; }
+.pixel-dot:nth-child(2) { top: 20%; right: 10%; }
+.pixel-dot:nth-child(3) { bottom: 30%; left: 15%; }
+.pixel-dot:nth-child(4) { bottom: 20%; right: 20%; }
+
+/* Адаптивность для авторизации */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 20px auto;
+        min-height: calc(100vh - 40px);
+    }
+    
+    .pixel-footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .button-group {
+        margin: 20px 0;
+    }
+}
